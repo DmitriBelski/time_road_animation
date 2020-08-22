@@ -14,4 +14,4 @@ npm run serve
 ```
 npm run build
 ```
-[![Watch the video](usage_example.gif)]
+![Watch the video](usage_example.gif)
