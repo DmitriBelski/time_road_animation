@@ -1,0 +1,101 @@
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+
+.body {
+    margin: 100px auto;
+    width: 1914px;
+}
+
+.svg {
+    margin: 30px;
+}
+
+.widgetBody {
+    position: relative;
+    margin-bottom: 7px;    
+} 
+
+.boxShadow {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 102%;
+    height: 100%;
+    box-shadow: inset 0px 200px 200px rgba(#fff, 0.75);
+    -webkit-box-shadow: inset 0px 300px 300px rgba(#fafbff, 0.96);
+    -moz-box-shadow: inset 0px 200px 200px #fff;
+    -o-box-shadow: inset 0px 200px 200px #fff;
+    pointer-events: none;
+}
+
+.dividerContainer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.divider {
+    position: absolute;
+    border: solid 1px #999;
+    width: 530px;
+    left: 50%;
+    top: 0%;
+}
+
+.titleContainer {
+    --widgetWidth: 1914px; // менять здесь
+    width: var(--widgetWidth);
+    display: grid;
+    grid-template-columns: repeat(18, 2fr);
+    div {
+        position: relative;
+        .centered {
+            --width: 260px; // менять здесь
+            width: var(--width);
+            --height: calc(var(--widgetWidth)/18);
+            height: var(--height);
+            position: absolute;
+            display: block;
+            left: 50%;
+            top: calc(var(--width) - var(--height)/2);
+            transform: translateX(-50%);
+            transform: rotate(-90deg);
+            transform-origin: 0%;
+            .title {
+                font-size: 1.8em;
+                font-weight: bold;
+                color: #fff;
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    }
+}
+
+.titleContainer > div {
+    &:nth-child(odd) {
+        .centered {
+            background-color: #D98031;
+        } 
+    }
+    &:nth-child(even) {
+        .centered {
+            background-color: #BF5410;
+        } 
+    }
+}
+
+.a,.b{fill-rule:evenodd;}
+
+.a{
+    fill:#e8e8e8;;
+}
+.b{fill:#ccc;}
+
+
+.arrow{fill:url(#arrow);}
+
+
+
