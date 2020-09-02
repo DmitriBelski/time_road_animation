@@ -1,4 +1,5 @@
 # time_road_animation
+VueJs-компонент с использованием RxJs
 
 ## Project setup
 ```
