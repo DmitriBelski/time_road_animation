@@ -1,15 +1,13 @@
 <template>
   <div class="body">
-    <b-form-input class="mb-5" type="range" v-model.number="range" min="0" :max="totalStep" step="1" v-stream:input="moveRange$"></b-form-input>
+    <b-form-input class="mb-3" type="range" v-model.number="range" min="0" :max="totalStep" step="1" v-stream:input="moveRange$"></b-form-input>
 
     <div class="widgetBody">
       <div class="dividerContainer" v-html="dividerHtml"></div>
+
       <svg v-on:mouseenter="onLabel(index)" v-on:mouseleave="offLabel(index)" v-for="(label, index) in labelsToRender" :key="index"  viewBox="0 0 111 179.35885" :style="`position: absolute; width: ${label.width}px; left: ${label.left}px; top: ${label.top}px;`">   
         <radialGradient id="labelShadow" cx="55.5" cy="163.93028" r="23.34577" gradientTransform="translate(0 81.96514) scale(1 0.5)" gradientUnits="userSpaceOnUse">
           <stop offset="0" stop-color="#404040"/>
-          <stop offset="0.26541" stop-color="#4d4e4e" stop-opacity="0.918"/>
-          <stop offset="0.49162" stop-color="#636466" stop-opacity="0.78492"/>
-          <stop offset="0.56999" stop-color="#5d5e60" stop-opacity="0.65937"/>
           <stop offset="1" stop-color="#404040" stop-opacity="0"/>
         </radialGradient>
         <path style="fill:#63cdfe;stroke:#fff;stroke-miterlimit:10;stroke-width:7px;fill-rule:evenodd;" d="M107.5,55.62873a52.00282,52.00282,0,1,0-66.89259,49.93221l12.03215,39.35389a3.03339,3.03339,0,0,0,5.72091,0l12.03214-39.3539A52.11462,52.11462,0,0,0,107.5,55.62873Z"/>
@@ -17,28 +15,25 @@
       </svg>
             
       <div class="boxShadow"></div>
-      <svg :width="frontLenght" :height="height" :viewBox="`0 ${1389.5-height} ${frontLenght} ${height}`">
-        <path id="p1" class="a" d="M106,1389C564,1114,811.21982,777,811.21982,0H793C793,777,515,1113,0,1389.5Z"/>
-        <path id="p2" class="b" d="M829.43964,0C829.43964,777,613,1114,213,1389H106C564,1114,811.21982,777,811.21982,0Z"/>
-        <path id="p3" class="a" d="M320,1389C662,1113,847.65946,777,847.65946,0H829.43964C829.43964,777,613,1114,213,1389Z"/>
-        <path id="p4" class="b" d="M865.87927,0C865.87927,777,711,1114,427,1389H320C662,1113,847.65946,777,847.65946,0Z"/>
-        <path id="p5" class="a" d="M534,1389C760,1114,884.09909,777,884.09909,0H865.87927C865.87927,777,711,1114,427,1389Z"/>
-        <path id="p6" class="b" d="M902.31891,0C902.31891,777,809,1114,640,1389H534C760,1114,884.09909,777,884.09909,0Z"/>
-        <path id="p7" class="a" d="M747,1389C858,1114,920.53873,777,920.53873,0H902.31891C902.31891,777,809,1114,640,1389Z"/>
-        <path id="p8" class="b" d="M938.75855,0C938.75855,777,907,1114,854,1389H747C858,1114,920.53873,777,920.53873,0Z"/>
-        <path id="p9" class="a" d="M957.5,1389.5,957,0H938.75855C938.75855,777,907,1114,854,1389Z"/>
-        <path id="p10" class="b" d="M956.5,1389.5,957,0h18.24145C975.24145,777,1007,1114,1060,1389Z"/>
-        <path id="p11" class="a" d="M975.24145,0C975.24145,777,1007,1114,1060,1389h107C1056,1114,993.46127,777,993.46127,0Z"/>
-        <path id="p12" class="b" d="M1167,1389C1056,1114,993.46127,777,993.46127,0h18.21982C1011.68109,777,1105,1114,1274,1389Z"/>
-        <path id="p13" class="a" d="M1011.68109,0C1011.68109,777,1105,1114,1274,1389h106C1154,1114,1029.90091,777,1029.90091,0Z"/>
-        <path id="p14" class="b" d="M1380,1389C1154,1114,1029.90091,777,1029.90091,0h18.21982C1048.12073,777,1203,1114,1487,1389Z"/>
-        <path id="p15" class="a" d="M1048.12073,0C1048.12073,777,1203,1114,1487,1389h107C1252,1113,1066.34054,777,1066.34054,0Z"/>
-        <path id="p16" class="b" d="M1594,1389C1252,1113,1066.34054,777,1066.34054,0h18.21982C1084.56036,777,1301,1114,1701,1389Z"/>
-        <path id="p17" class="a" d="M1084.56036,0C1084.56036,777,1301,1114,1701,1389h107C1350,1114,1102.78018,777,1102.78018,0Z"/>
-        <path id="p18" class="b" d="M1808,1389C1350,1114,1102.78018,777,1102.78018,0H1121c0,777,278,1113,793,1389.5Z"/>
+      
+      <svg :viewBox="`0 0 ${width} ${height}`">
+        <path v-for="(c, i) in count" :key="i"     
+          :id="`p${i+1}`" :class="{ a: i%2==0, b: i%2==1 }" 
+          :d="`
+            M${0+i*w_down}  ${height}  
+            C${shiftMid+i*w_mid}  ${heightMid}  
+            ${shiftUp+i*w_up}  ${heightUp}  
+            ${shiftUp2+i*w_up2}  0  
+            L${shiftUp2+(i+1)*w_up2}  0  
+            C${shiftUp+(i+1)*w_up}  ${heightUp}  
+            ${shiftMid+(i+1)*w_mid}  ${heightMid}  
+            ${0+(i+1)*w_down}  ${height}Z
+          `"/>
       </svg>
+
       <div class="boxShadow"></div>
     </div>
+
     <div class="titleContainer">
       <div v-for="(title, index) in columnTitle" :key="index">
         <div :id="`t${index}`" class="centered">
@@ -96,11 +91,29 @@ export default {
       // watchData$,
     }
   },
+  props: {
+    count: Number,
+    size: Number
+  },
   data() {
     return {
+      width: this.size,
+      widthDown: null,
+      widthMid: null,
+      widthUp: null,
+      widthUp2: null,
+      w_down: null,
+      w_mid: null,
+      w_up: null,
+      w_up2: null,
+      height: null,
+      heightMid: null,
+      heightUp: null,
+      shiftMid: null,
+      shiftUp: null,
+      shiftUp2: null,
+      labelSize: null,
       scaler: 2, // множитель, который увеличивает range до realRange и frameRange до realFrame, чем он больше, тем больше видимое растояние между объектами в виджете
-      frontLenght: 1914, // длина ближнего края
-      height: 1050, // высота виджета
       range: 100, // сюда идут данные с ползунка - это номер шага ползунка - и стартовае положение ползунка
       totalStep: 1000, // количество шагов в ленте, передается как максимальное значение в range-ползунке
       frameRange: 216, // кол-во шагов ползунка в окне видимости
@@ -143,8 +156,8 @@ export default {
       for (let i=0; i<this.dividers.length; i++) {
         if (this.dividers[i] >= r && this.dividers[i] < r + this.realFrame) {
           this.dividersInFrame.push(this.floor2(this.dividers[i] - r))
-          let x = this.dividersInFrame.length - 1
-          this.dividerHtml += `<span style="position: absolute; border: solid 1px #999; width: ${this.dLenght(this.dividersInFrame[x])}px; left: ${(this.floor2(this.frontLenght-this.dLenght(this.dividersInFrame[x])))/2}px; top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
+          const x = this.dividersInFrame.length - 1
+          this.dividerHtml += `<span style="position: absolute; border: solid 1px #999; width: ${this.dLenght(this.dividersInFrame[x])}px; left: ${(this.floor2(this.width-this.dLenght(this.dividersInFrame[x])))/2}px; top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
         }
       }
       // обновляем массив из значков попавших в окно видимости
@@ -154,15 +167,15 @@ export default {
         if (this.labels[i].step >= r && this.labels[i].step < r + this.realFrame - 25) { //  - 25 подобрал эмпирически - чтобы не вылазило за экран виджета сверху
           this.labelsInFrame.push({col: this.labels[i].col, step: this.floor2(this.labels[i].step - r)})
           let y = this.labelsInFrame.length - 1
-          let width = 130 * this.dScale(this.labelsInFrame[y].step)
+          let width = this.labelSize * this.dScale(this.labelsInFrame[y].step)
           let height = width * 208.11 / 128.8
           // отрисовка через v-for - параметры записываем в массив labelsToRender
           this.labelsToRender.push({
             width: width, 
-            left: this.floor2((this.frontLenght-this.dLenght(this.labelsInFrame[y].step))/2 + this.dLenght(this.labelsInFrame[y].step)/18 * (this.labelsInFrame[y].col - 0.5) - width/2),
+            left: this.floor2((this.width-this.dLenght(this.labelsInFrame[y].step))/2 + this.dLenght(this.labelsInFrame[y].step)/18 * (this.labelsInFrame[y].col - 0.5) - width/2),
             top: this.floor2(this.dHeight(this.labelsInFrame[y].step) - height * 0.92)
           })
-          if (this.enterToRenderIndex[0] === y) {this.mouseEncrease(y)}
+          if (this.enterToRenderIndex[0] === y) {this.hoverEncrease(y)}
         }
       }
       // если индексы в labelsInFrame сменились, то нужно обновить индекс выделения, найдя в labelsInFrame новый индекс выделеного значка, а если не найден, значит он ушел за горизонт и включаем this.offLabel()
@@ -203,7 +216,7 @@ export default {
         a -= -0.0077 * Math.pow(x,2) + 0.0586 * x - 0.10355 // в определенном интервале небходимо уточнение, так как степенная функция не дает нужной точности
         a = this.floor4(a)
       }
-      return this.floor2(this.frontLenght*a)
+      return this.floor2(this.width*a)
     },
     // высота в пикселях разделителя от ближнего края, от растояния в шагах от ближего края
     dHeight(position) {
@@ -214,11 +227,14 @@ export default {
       a = this.floor2(a)      
       let b = 0.24 * Math.pow(x,3) + 15.14 * Math.pow(x,2) - 114.83 * x + 203.06
       b = this.floor2(b) 
+      let q
+      // формула расчитывалась для высоты 1050
       if (a>403 || b>150) {
-        return this.floor2(this.height - (a + b))
+        q=(1050 - (a + b))/1050
       } else {
-        return this.floor2(this.height - a)
+        q=(1050 - a)/1050
       }
+      return this.floor2(this.height*q)
     },
     // размер иконок и шрифтов в процентах от заданного стандарта, от растояния в шагах от ближего края
     dScale(position) {
@@ -227,14 +243,14 @@ export default {
       x = -0.0009 * Math.pow(x,3) + 0.028 * Math.pow(x,2) - 0.307 * x + 1.5
       return this.floor4(x)
     },  
-    mouseEncrease(index) {
+    hoverEncrease(index) {
       let increase = 1.5
       this.labelsToRender[index].left -= this.labelsToRender[index].width * (increase-1) / 2
       this.labelsToRender[index].top -= this.labelsToRender[index].width * 208.11 / 128.8 * (increase-1)
       this.labelsToRender[index].width *= increase
     },
     onLabel(index) {
-      this.mouseEncrease(index)
+      this.hoverEncrease(index)
       this.enterToRenderIndex[0] = index
       this.enterToRenderIndex[1] = this.labelsInFrame[index].col
       this.enterToRenderIndex[2] = this.labelsInFrame[index].step
@@ -307,7 +323,7 @@ export default {
         let x = this.dividersInFrame.length - 1
         this.dividerHtml += `<span style="position: absolute; border: solid 1px #999; 
         width: ${this.dLenght(this.dividersInFrame[x])}px; 
-        left: ${(this.floor2(this.frontLenght-this.dLenght(this.dividersInFrame[x])))/2}px; 
+        left: ${(this.floor2(this.width-this.dLenght(this.dividersInFrame[x])))/2}px; 
         top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
       }
 
@@ -318,12 +334,12 @@ export default {
       if (this.labels[i].step >= this.range * this.scaler && this.labels[i].step < this.range * this.scaler + this.realFrame) {
         this.labelsInFrame.push({col: this.labels[i].col, step: this.labels[i].step - this.range * this.scaler})
         let y = this.labelsInFrame.length - 1
-        let width = 130 * this.dScale(this.labelsInFrame[y].step)
+        let width = this.labelSize * this.dScale(this.labelsInFrame[y].step)
         let height = width * 208.11 / 128.8
         // параметры записываем в массив для отрисовки через v-for
         this.labelsToRender.push({
           width: this.enterToRenderIndex === y ? width * 1.5 : width, 
-          left: this.floor2((this.frontLenght-this.dLenght(this.labelsInFrame[y].step))/2 + this.dLenght(this.labelsInFrame[y].step)/18 * (this.labelsInFrame[y].col - 0.5) - width/2),
+          left: this.floor2((this.width-this.dLenght(this.labelsInFrame[y].step))/2 + this.dLenght(this.labelsInFrame[y].step)/18 * (this.labelsInFrame[y].col - 0.5) - width/2),
           top: this.floor2(this.dHeight(this.labelsInFrame[y].step) - height * 0.92)
         })
       }
@@ -340,6 +356,24 @@ export default {
       this.easeOut[i] = this.floor3(4*this.zeroToOne[i]-3*Math.pow(this.zeroToOne[i],1.33)) // еще плавнее в конце 
       this.zeroToOne[i] = this.floor3(this.zeroToOne[i])
     }
+  },
+  created() {
+    // размеры полосок
+    this.height = this.width*0.55
+    this.widthDown = this.width
+    this.widthMid = this.floor2(this.widthDown*0.59)
+    this.widthUp = this.floor2(this.widthDown*0.279)
+    this.widthUp2 = this.floor2(this.widthDown*0.192)
+    this.w_down = this.floor2(this.widthDown/this.count)
+    this.w_mid = this.floor2(this.widthMid/this.count)
+    this.w_up = this.floor2(this.widthUp/this.count)
+    this.w_up2 = this.floor2(this.widthUp2/this.count)
+    this.heightMid = this.floor2(this.height*0.8)
+    this.heightUp = this.floor2(this.height*0.56)
+    this.shiftMid = this.floor2((this.widthDown-this.widthMid)/2)
+    this.shiftUp = this.floor2((this.widthDown-this.widthUp)/2)
+    this.shiftUp2 = this.floor2((this.widthDown-this.widthUp2)/2)
+    this.labelSize = this.width*0.068
   }
 };
 </script>
