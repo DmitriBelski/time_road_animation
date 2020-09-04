@@ -1,7 +1,9 @@
 # time_road_animation
-VueJs-компонент с использованием RxJs
+Анимация для визуализации событий на временной шкале с использованием SVG, VueJs и RxJs
 
-## Project setup
+Online [DEMO](https://DmitriBelski.github.io/time_road_animation)
+
+### Project setup
 ```
 npm install
 ```
