@@ -1,13 +1,11 @@
 @import 'node_modules/bootstrap/scss/bootstrap';
 @import 'node_modules/bootstrap-vue/src/index.scss';
 
-.body {
-    margin: 100px auto;
-    width: 1914px;
-}
+$Width: 1000px;
 
-.svg {
-    margin: 30px;
+.body {
+    margin: 50px auto;
+    width: $Width;
 }
 
 .widgetBody {
@@ -17,14 +15,11 @@
 
 .boxShadow {
     position: absolute;
-    top: -3px;
-    left: 0;
+    top: -2%;
+    left: -1%;
     width: 102%;
-    height: 100%;
-    box-shadow: inset 0px 200px 200px rgba(#fff, 0.75);
-    -webkit-box-shadow: inset 0px 300px 300px rgba(#fafbff, 0.96);
-    -moz-box-shadow: inset 0px 200px 200px #fff;
-    -o-box-shadow: inset 0px 200px 200px #fff;
+    height: 102%;
+    box-shadow: inset 0px 150px 150px rgba(#fff, 0.9);
     pointer-events: none;
 }
 
@@ -43,16 +38,16 @@
 }
 
 .titleContainer {
-    --widgetWidth: 1914px; // менять здесь
+    --widgetWidth: #{$Width}; // менять здесь
     width: var(--widgetWidth);
     display: grid;
     grid-template-columns: repeat(18, 2fr);
     div {
         position: relative;
         .centered {
-            --width: 260px; // менять здесь
+            --width: calc(var(--widgetWidth)/6); // менять здесь
             width: var(--width);
-            --height: calc(var(--widgetWidth)/18);
+            --height: calc(var(--width)/3);
             height: var(--height);
             position: absolute;
             display: block;
@@ -62,11 +57,11 @@
             transform: rotate(-90deg);
             transform-origin: 0%;
             .title {
-                font-size: 1.8em;
+                font-size: calc(var(--width)/9);
                 font-weight: bold;
                 color: #fff;
                 position: absolute;
-                right: 10px;
+                right: 8px;
                 top: 50%;
                 transform: translateY(-50%);
             }
@@ -89,11 +84,11 @@
 
 .a,.b{fill-rule:evenodd;}
 
-.a{
-    fill:#e8e8e8;;
-}
+.a{fill:#e8e8e8;}
+
 .b{fill:#ccc;}
 
+.c{fill: crimson;}
 
 .arrow{fill:url(#arrow);}
 

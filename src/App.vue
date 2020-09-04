@@ -1,6 +1,10 @@
 <template>
   <div>
-    <svgAnimations />
+    <svgAnimations
+      :count="18"
+      :size="1000"
+    >
+    </svgAnimations>
   </div>
 </template>
 
