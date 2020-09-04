@@ -157,7 +157,7 @@ export default {
         if (this.dividers[i] >= r && this.dividers[i] < r + this.realFrame) {
           this.dividersInFrame.push(this.floor2(this.dividers[i] - r))
           const x = this.dividersInFrame.length - 1
-          this.dividerHtml += `<span style="position: absolute; border: solid 1px #999; width: ${this.dLenght(this.dividersInFrame[x])}px; left: ${(this.floor2(this.width-this.dLenght(this.dividersInFrame[x])))/2}px; top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
+          this.dividerHtml += `<span style="position: absolute; border: solid ${this.width/2000}px #999; width: ${this.dLenght(this.dividersInFrame[x])}px; left: ${(this.floor2(this.width-this.dLenght(this.dividersInFrame[x])))/2}px; top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
         }
       }
       // обновляем массив из значков попавших в окно видимости
@@ -321,7 +321,7 @@ export default {
       if (this.dividers[i] >= this.range * this.scaler && this.dividers[i] < this.range * this.scaler + this.realFrame) {
         this.dividersInFrame.push(this.dividers[i] - this.range * this.scaler)
         let x = this.dividersInFrame.length - 1
-        this.dividerHtml += `<span style="position: absolute; border: solid 1px #999; 
+        this.dividerHtml += `<span style="position: absolute; border: solid ${this.width/2000}px #999; 
         width: ${this.dLenght(this.dividersInFrame[x])}px; 
         left: ${(this.floor2(this.width-this.dLenght(this.dividersInFrame[x])))/2}px; 
         top: ${this.dHeight(this.dividersInFrame[x])}px;"></span>`
