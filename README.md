@@ -1,7 +1,7 @@
 # time_road_animation
 Анимация для визуализации событий на временной шкале с использованием SVG, VueJs и RxJs
 
-Online [DEMO](https://DmitriBelski.github.io/time_road_animation)
+Online [DEMO](https://DmitriBelski.github.io/timeline_animation)
 
 ### Project setup
 ```
